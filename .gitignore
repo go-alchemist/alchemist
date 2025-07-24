@@ -1,0 +1,42 @@
+# Go build artifacts
+/bin/
+/build/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Dependency directories
+/vendor/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment/config files
+.env
+.env.*
+
+# Logs
+*.log
+
+# Coverage
+coverage.out
+
+# Database
+*.db
+*.sqlite
+
+# Misc
+*.bak
+*.tmp
