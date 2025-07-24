@@ -21,8 +21,6 @@ jobs:
           go-version: ' 1.24.4'
 
       - name: Build
-        env:
-          GOTOOLCHAIN: local
         run: |
           GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o alchemist-${{ matrix.os }}-${{ matrix.arch }} ./cmd
 
