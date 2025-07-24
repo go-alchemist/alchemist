@@ -34,8 +34,11 @@ nfpms:
 checksum:
   name_template: 'sha256sum.txt'
 release:
-  draft: true
+  draft: false
   prerelease: auto
+  name_template: "{{ .Tag }}"
+  changelog:
+    sort: asc
 source:
   enabled: true
   format: zip
