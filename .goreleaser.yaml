@@ -17,6 +17,8 @@ builds:
     goarm:
       - 7
     main: ./cmd
+    ldflags:
+      - '-w -s -X main.Version={{ .Version }} -extldflags "static"'
     ignore:
       - goos: windows
         goarch: arm
