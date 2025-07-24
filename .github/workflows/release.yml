@@ -37,6 +37,14 @@ jobs:
         run: |
           sha256sum alchemist-* > sha256sum.txt
 
+      - name: Check CHANGELOG presence
+        run: |
+            if [ -f CHANGELOG.md ]; then
+              echo "CHANGELOG.md exists"
+            else
+              echo "CHANGELOG.md NOT FOUND"
+              exit 1
+            fi
       - name: Read Changelog
         id: changelog
         run: |
