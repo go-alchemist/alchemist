@@ -1,0 +1,12 @@
+project_name: alchemist
+builds:
+  - id: alchemist
+    main: ./cmd/main.go
+    goos: [linux, windows, darwin]
+    goarch: [amd64, 386, arm64, armv7]
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+changelog:
+  skip: false
+  file: CHANGELOG.md
