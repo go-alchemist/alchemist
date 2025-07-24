@@ -1,0 +1,53 @@
+version: 2
+project_name: alchemist
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm
+      - arm64
+      - 386
+    goarm:
+      - 7
+    main: ./cmd
+    ldflags:
+      - '-w -s -X main.Version={{ .Version }} -extldflags "static"'
+    ignore:
+      - goos: windows
+        goarch: arm
+nfpms:
+  - homepage: "https://github.com/go-alchemist/alchemist"
+    maintainer: "koushirogamer@gmail.com"
+    license: MIT
+    description: "Alchemist CLI"
+    formats:
+      - deb
+    file_name_template: "{{ .ProjectName }}.{{ .Os }}-{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+checksum:
+  name_template: 'sha256sum.txt'
+release:
+  draft: false
+  prerelease: auto
+  name_template: "{{ .Tag }}"
+  changelog:
+    sort: asc
+source:
+  enabled: true
+  format: zip
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - go mod tidy
+snapshot:
+  name_template: "{{ .Tag }}-next"
