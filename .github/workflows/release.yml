@@ -22,7 +22,7 @@ jobs:
 
       - name: Build
         run: |
-          GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o alchemist-${{ matrix.os }}-${{ matrix.arch }}
+          GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o alchemist-${{ matrix.os }}-${{ matrix.arch }} ./cmd
 
       - name: Generate sha256sum
         run: |
