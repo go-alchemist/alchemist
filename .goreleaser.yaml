@@ -17,6 +17,9 @@ builds:
     goarm:
       - 7
     main: ./cmd
+    ignore:
+      - goos: windows
+        goarch: arm
 nfpms:
   - homepage: "https://github.com/go-alchemist/alchemist"
     maintainer: "koushirogamer@gmail.com"
