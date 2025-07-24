@@ -7,7 +7,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/go-alchemist/alchemist/cmd/response"
+	"github.com/go-alchemist/alchemist/internal/cli/response"
 )
 
 var ModelCmd = &cobra.Command{
