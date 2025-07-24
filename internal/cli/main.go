@@ -1,12 +1,12 @@
-package cmd
+package cli
 
 import (
 	"os"
 
 	"github.com/spf13/cobra"
 
-	"github.com/go-alchemist/alchemist/cmd/make"
-	"github.com/go-alchemist/alchemist/cmd/migrate"
+	"github.com/go-alchemist/alchemist/internal/cli/make"
+	"github.com/go-alchemist/alchemist/internal/cli/migrate"
 )
 
 var version = "v1.0.0"
