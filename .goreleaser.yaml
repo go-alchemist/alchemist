@@ -16,7 +16,7 @@ builds:
       - 386
     goarm:
       - 7
-    main: ./cmd/main
+    main: ./cmd
 nfpms:
   - homepage: "https://github.com/go-alchemist/alchemist"
     maintainer: "koushirogamer@gmail.com"
