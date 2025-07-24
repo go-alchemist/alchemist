@@ -40,7 +40,11 @@ jobs:
       - name: Read Changelog
         id: changelog
         run: |
-          echo "changelog=$(cat CHANGELOG.md)" >> $GITHUB_OUTPUT
+          {
+            echo 'changelog<<EOF'
+            cat CHANGELOG.md
+            echo 'EOF'
+          } >> $GITHUB_OUTPUT
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
