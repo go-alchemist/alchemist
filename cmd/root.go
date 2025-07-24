@@ -9,7 +9,7 @@ import (
 	"github.com/go-alchemist/alchemist/cmd/migrate"
 )
 
-var version = "v0.1.0"
+var version = "v1.0.0"
 
 var rootCmd = &cobra.Command{
 	Use:     "alchemist",
