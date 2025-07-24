@@ -16,11 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5.5.0
         with:
-          go-version: "1.24"
+          go-version: ' 1.24.4'
 
       - name: Build
+        env:
+          GOTOOLCHAIN: local
         run: |
           GOOS=${{ matrix.os }} GOARCH=${{ matrix.arch }} go build -o alchemist-${{ matrix.os }}-${{ matrix.arch }} ./cmd
 
@@ -32,7 +34,7 @@ jobs:
         id: changelog
         run: |
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          cat CHANGELOG.md >> $GITHUB_OUTPUT    # ou tail -n 50 CHANGELOG.md se quiser só o final
+          cat CHANGELOG.md >> $GITHUB_OUTPUT
           echo EOF >> $GITHUB_OUTPUT
 
       - name: Upload to Release
