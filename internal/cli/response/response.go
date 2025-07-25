@@ -36,7 +36,7 @@ func Warning(message string) {
 	}
 }
 
-func SelectMicroserviceIfEnabled(baseDir string) string {
+func SelectMicroserviceIfEnabled() string {
 	enabled := config.Config.GetBool("features.microservice.enabled")
 	if !enabled {
 		Info("Microservice feature is not enabled.")
@@ -87,10 +87,10 @@ func SelectMicroserviceIfEnabled(baseDir string) string {
 
 	_, result, err := prompt.Run()
 	if err != nil {
-		Warning("Selection cancelled")
+		Error("Selection cancelled")
 		return ""
 	}
 
-	dirFinal := path.Join(serDir, result, baseDir)
+	dirFinal := path.Join(serDir, result)
 	return dirFinal
 }

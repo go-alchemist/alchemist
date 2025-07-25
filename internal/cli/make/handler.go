@@ -3,6 +3,7 @@ package make
 import (
 	"fmt"
 	"os"
+	"path"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -26,16 +27,22 @@ func init() {
 func MakeHandler(cmd *cobra.Command, args []string) {
 	handlerName := args[0]
 
-	originalDir := config.Config.GetString("paths.handlers")
+	flagDir, _ := cmd.Flags().GetString("dir")
+	originalDir := flagDir
 	if originalDir == "" {
-		originalDir = "internal/handlers"
+		originalDir = config.Config.GetString("paths.handlers")
+		if originalDir == "" {
+			originalDir = "internal/handlers"
+		}
 	}
 
-	dir := response.SelectMicroserviceIfEnabled(originalDir)
+	dir := response.SelectMicroserviceIfEnabled()
 	if dir == "" {
 		response.Error("Microservice feature is not enabled or directory not found")
 		return
 	}
+
+	dir = path.Join(dir, originalDir)
 
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		os.MkdirAll(dir, os.ModePerm)
