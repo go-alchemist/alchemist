@@ -5,11 +5,13 @@ go 1.24.4
 require (
 	github.com/fatih/color v1.18.0
 	github.com/golang-migrate/migrate/v4 v4.18.3
+	github.com/manifoldco/promptui v0.9.0
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.20.1
 )
 
 require (
+	github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect

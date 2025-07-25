@@ -19,9 +19,11 @@ var ModelCmd = &cobra.Command{
 
 func init() {
 	ModelCmd.Flags().String("dir", "internal/models", "Directory for models")
+
 }
 
 func MakeModel(cmd *cobra.Command, args []string) {
+
 	modelName := args[0]
 	content := fmt.Sprintf("package models\n\ntype %s struct {\n    // Fields here\n}\n", modelName)
 	dir, _ := cmd.Flags().GetString("dir")
@@ -31,7 +33,7 @@ func MakeModel(cmd *cobra.Command, args []string) {
 	filePath := fmt.Sprintf("%s/%s.go", dir, strings.ToLower(modelName))
 	err := os.WriteFile(filePath, []byte(content), 0644)
 	if err != nil {
-		response.Error(fmt.Errorf("error creating model: %v", err))
+		response.Error("Error creating model file: " + err.Error())
 		return
 	}
 

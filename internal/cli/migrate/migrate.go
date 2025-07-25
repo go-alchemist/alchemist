@@ -51,7 +51,7 @@ func initConfig() {
 func Migrate(cmd *cobra.Command, args []string) {
 	_, dbURL, err := getDatabaseURL()
 	if err != nil {
-		response.Error(fmt.Errorf("config error: %v", err))
+		response.Error("Error getting database URL: " + err.Error())
 		return
 	}
 
@@ -65,12 +65,12 @@ func Migrate(cmd *cobra.Command, args []string) {
 	)
 
 	if err != nil {
-		response.Error(fmt.Errorf("migration error: %v", err))
+		response.Error("Error initializing migration: " + err.Error())
 		return
 	}
 
 	if err := m.Up(); err != nil && err.Error() != "no change" {
-		response.Error(fmt.Errorf("migration up error: %v", err))
+		response.Error("Error applying migrations: " + err.Error())
 		return
 	}
 
@@ -104,8 +104,8 @@ func getDatabaseURL() (driver string, url string, err error) {
 			viper.GetString("DB_DATABASE"),
 		)
 	default:
-		err = fmt.Errorf("unsupported DB_CONNECTION or missing environment variables")
-		response.Error(err)
+		response.Error("Unsupported DB_CONNECTION or missing environment variables")
+		return
 	}
 
 	return

@@ -5,6 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/go-alchemist/alchemist/internal/cli/config"
 	"github.com/go-alchemist/alchemist/internal/cli/make"
 	"github.com/go-alchemist/alchemist/internal/cli/migrate"
 )
@@ -25,6 +26,7 @@ func Execute() {
 }
 
 func init() {
+	config.InitConfig()
 	rootCmd.AddCommand(make.MakeCmd)
 	rootCmd.AddCommand(migrate.MigrateCmd)
 	rootCmd.SetVersionTemplate("Alchemist CLI version: {{.Version}}\n")

@@ -43,7 +43,7 @@ func MakeMigration(cmd *cobra.Command, args []string) {
 	errDown := os.WriteFile(downFile, []byte(downTemplate), 0644)
 
 	if errUp != nil || errDown != nil {
-		response.Error(fmt.Errorf("error creating migration files: %v %v", errUp, errDown))
+		response.Error("Error creating migration files: " + errUp.Error() + " " + errDown.Error())
 		return
 	}
 
