@@ -8,8 +8,6 @@ import (
 	"github.com/orochaa/go-clack/prompts"
 	"github.com/urfave/cli/v2"
 	"gopkg.in/yaml.v3"
-
-	"github.com/go-alchemist/alchemist/internal/cli/components"
 )
 
 type model struct {
@@ -42,8 +40,6 @@ func RunSetup(ctx *cli.Context) error {
 }
 
 func (m *model) InitSetup() {
-	prompts.Intro(components.Banner())
-
 	m.SelectProjectName()
 
 	m.DefaultSettings()
@@ -68,7 +64,7 @@ type Config struct {
 	ProjectName   string                            `yaml:"project_name"`
 	Debug         bool                              `yaml:"debug"`
 	PathStructure string                            `yaml:"path_structure"`
-	CustomPaths   map[string]string                 `yaml:"custom_paths,omitempty"`
+	CustomPaths   map[string]string                 `yaml:"custom_path,omitempty"`
 	Config        ConfigDetails                     `yaml:"config"`
 	Features      map[string]map[string]interface{} `yaml:"features,omitempty"`
 }
