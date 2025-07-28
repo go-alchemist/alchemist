@@ -84,6 +84,13 @@ type DatabaseConfig struct {
 	Schema   string `yaml:"schema"`
 }
 
+type CustomPaths struct {
+	Handler    string `yaml:"handler"`
+	Repository string `yaml:"repository"`
+	Model      string `yaml:"model"`
+	Service    string `yaml:"service"`
+}
+
 func (m *model) Setup() {
 
 	cfg := &Config{
@@ -114,12 +121,13 @@ func (m *model) Setup() {
 					_ = os.MkdirAll(m.ProjectName, 0755)
 
 					if m.FolderStructure == "custom" {
-						cfg.CustomPaths = make(map[string]string)
-						for _, folder := range m.CustomFolders {
-							cfg.CustomPaths[folder] = "./" + folder
+						cfg.CustomPaths = map[string]string{
+							"handler":    "./handler",
+							"repository": "./repository",
+							"model":      "./model",
+							"service":    "./service",
 						}
 					}
-
 					cfg.Config = ConfigDetails{
 						File: m.ConfigFile,
 						Database: DatabaseConfig{
