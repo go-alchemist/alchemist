@@ -1,4 +1,10 @@
-version: 1
+package templates
+
+import (
+	"text/template"
+)
+
+const yamlTemplate = `version: 1
 debug: false
 
 paths:
@@ -18,9 +24,14 @@ env_config:
     password: DB_PASSWORD
     name: DB_NAME
     schema: DB_SCHEMA
-    
+
 features:
-  microservice: 
+  microservice:
     enabled: true
     regex: '.*service.*'
     directory: ./services
+`
+
+func GetYamlTemplate() (*template.Template, error) {
+	return template.New("yaml").Parse(yamlTemplate)
+}

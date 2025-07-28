@@ -11,5 +11,5 @@ type {{ .ModelName }} struct {
 `
 
 func GetModelTemplate() (*template.Template, error) {
-	return template.New("handler").Parse(modelTemplate)
+	return template.New("model").Parse(modelTemplate)
 }
