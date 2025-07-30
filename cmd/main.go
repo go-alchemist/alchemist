@@ -44,6 +44,50 @@ func main() {
 						Action: make.MakeHandler,
 						Before: initConfig,
 					},
+					{
+						Name:   "model",
+						Usage:  "Create a new model",
+						Action: make.MakeModel,
+						Before: initConfig,
+					},
+					{
+						Name:   "repository",
+						Usage:  "Create a new repository",
+						Action: make.MakeRepository,
+						Before: initConfig,
+					},
+					{
+						Name:   "service",
+						Usage:  "Create a new service",
+						Action: make.MakeService,
+						Before: initConfig,
+					},
+					{
+						Name:   "migration",
+						Usage:  "Create a new migration",
+						Action: make.MakeMigration,
+						Before: initConfig,
+					},
+
+					{
+						Name:   "dto",
+						Usage:  "Create a new DTO",
+						Action: make.MakeDTO,
+						Before: initConfig,
+					},
+					{
+						Name:   "usecase",
+						Usage:  "Create a new usecase",
+						Action: make.MakeUsecase,
+						Before: initConfig,
+					},
+
+					{
+						Name:   "test",
+						Usage:  "Create a new test file",
+						Action: make.MakeTest,
+						Before: initConfig,
+					},
 				},
 			},
 		},

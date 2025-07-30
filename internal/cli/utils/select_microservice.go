@@ -1,4 +1,4 @@
-package components
+package utils
 
 import (
 	"fmt"
@@ -8,6 +8,7 @@ import (
 
 	"github.com/orochaa/go-clack/prompts"
 
+	"github.com/go-alchemist/alchemist/internal/cli/components"
 	"github.com/go-alchemist/alchemist/internal/cli/config"
 )
 
@@ -32,8 +33,8 @@ func SelectMicroserviceIfEnabled(structure string) string {
 
 	entries, err := os.ReadDir(dir)
 	if err != nil {
-		prompts.Error(Red.Render("Error performing operation"))
-		fmt.Println((Red.Render("Cannot read the microservices directory. Check the path and permissions.")))
+		prompts.Error(components.Red.Render("Error performing operation"))
+		fmt.Println((components.Red.Render("Cannot read the microservices directory. Check the path and permissions.")))
 		os.Exit(0)
 		return ""
 	}
@@ -46,8 +47,8 @@ func SelectMicroserviceIfEnabled(structure string) string {
 	}
 
 	if len(services) == 0 {
-		prompts.Error(Red.Render("Error performing operation"))
-		fmt.Println(Red.Render("No microservices found matching the regex: " + regexStr))
+		prompts.Error(components.Red.Render("Error performing operation"))
+		fmt.Println(components.Red.Render("No microservices found matching the regex: " + regexStr))
 		os.Exit(0)
 		return ""
 	}
@@ -66,7 +67,7 @@ func SelectMicroserviceIfEnabled(structure string) string {
 	})
 	if err != nil {
 		if prompts.IsCancel(err) {
-			prompts.Error(Red.Render("Selection cancelled"))
+			prompts.Error(components.Red.Render("Selection cancelled"))
 			os.Exit(0)
 			return ""
 		}

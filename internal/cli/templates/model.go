@@ -4,9 +4,11 @@ import (
 	"text/template"
 )
 
-const modelTemplate = `package models
+const modelTemplate = `package model
+
+// {{ .ModelName }} represents the {{ .ModelName }} entity.
 type {{ .ModelName }} struct {
-	// Fields here
+	// TODO: Add fields
 }
 `
 

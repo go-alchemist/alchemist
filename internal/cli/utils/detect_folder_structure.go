@@ -1,4 +1,4 @@
-package components
+package utils
 
 import (
 	"github.com/go-alchemist/alchemist/internal/cli/config"

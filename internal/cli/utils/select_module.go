@@ -1,15 +1,17 @@
-package components
+package utils
 
 import (
 	"os"
 
 	"github.com/orochaa/go-clack/prompts"
+
+	"github.com/go-alchemist/alchemist/internal/cli/components"
 )
 
 func SelectModule(basePath string) string {
 	entries, err := os.ReadDir(basePath)
 	if err != nil {
-		prompts.Error(Red.Render("Could not read the modules directory. Check the path and permissions."))
+		prompts.Error(components.Red.Render("Could not read the modules directory. Check the path and permissions."))
 		os.Exit(0)
 		return ""
 	}
@@ -22,7 +24,7 @@ func SelectModule(basePath string) string {
 	}
 
 	if len(modules) == 0 {
-		prompts.Error(Red.Render("No modules found in the directory."))
+		prompts.Error(components.Red.Render("No modules found in the directory."))
 		os.Exit(0)
 		return ""
 	}
