@@ -18,7 +18,11 @@ func MakeDTO(c *cli.Context) error {
 		return err
 	}
 	base, structure, serviceDir, domainDir, modularDir := resolveDirs("dto", c)
-	targetDir, err := DTOTargetDir(base, structure, serviceDir, domainDir, modularDir)
+
+	sDir := c.String("dir")
+	targetDir, err := utils.GetTargetDirWithDomainModule(
+		serviceDir, domainDir, modularDir, sDir, DTOTargetDir, base, structure,
+	)
 	if err != nil {
 		return utils.PrintErrorAndReturn("Could not determine target directory for DTO")
 	}

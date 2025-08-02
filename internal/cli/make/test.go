@@ -18,9 +18,12 @@ func MakeTest(c *cli.Context) error {
 		return err
 	}
 	base, structure, serviceDir, domainDir, modularDir := resolveDirs("test", c)
-	targetDir, err := TestTargetDir(base, structure, serviceDir, domainDir, modularDir)
+	sDir := c.String("dir")
+	targetDir, err := utils.GetTargetDirWithDomainModule(
+		serviceDir, domainDir, modularDir, sDir, TestTargetDir, base, structure,
+	)
 	if err != nil {
-		return utils.PrintErrorAndReturn("Could not determine target directory for test")
+		return utils.PrintErrorAndReturn("Could not determine target directory for DTO")
 	}
 	if err := utils.EnsureDir(targetDir); err != nil {
 		return utils.PrintErrorAndReturn("Could not create the test directory.")

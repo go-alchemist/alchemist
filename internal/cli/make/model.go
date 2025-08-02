@@ -34,9 +34,12 @@ func MakeModel(c *cli.Context) error {
 		domainDir = utils.SelectDomain(filepath.Join(base, serviceDir))
 	}
 
-	targetDir, err := ModelTargetDir(base, structure, serviceDir, domainDir, modularDir)
+	sDir := c.String("dir")
+	targetDir, err := utils.GetTargetDirWithDomainModule(
+		serviceDir, domainDir, modularDir, sDir, ModelTargetDir, base, structure,
+	)
 	if err != nil {
-		return utils.PrintErrorAndReturn("Could not determine target directory for model")
+		return utils.PrintErrorAndReturn("Could not determine target directory for DTO")
 	}
 
 	if err := utils.EnsureDir(targetDir); err != nil {

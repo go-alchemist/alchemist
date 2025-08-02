@@ -18,9 +18,12 @@ func MakeRepository(c *cli.Context) error {
 		return err
 	}
 	base, structure, serviceDir, domainDir, modularDir := resolveDirs("repository", c)
-	targetDir, err := RepositoryTargetDir(base, structure, serviceDir, domainDir, modularDir)
+	sDir := c.String("dir")
+	targetDir, err := utils.GetTargetDirWithDomainModule(
+		serviceDir, domainDir, modularDir, sDir, RepositoryTargetDir, base, structure,
+	)
 	if err != nil {
-		return utils.PrintErrorAndReturn("Could not determine target directory for repository")
+		return utils.PrintErrorAndReturn("Could not determine target directory for DTO")
 	}
 	if err := utils.EnsureDir(targetDir); err != nil {
 		return utils.PrintErrorAndReturn("Could not create the repository directory.")

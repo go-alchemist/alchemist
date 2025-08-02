@@ -21,13 +21,13 @@ func MakeMigration(c *cli.Context) error {
 
 	base := "."
 	structure := utils.DetectProjectStructure(base)
-
 	serviceDir := utils.SelectMicroserviceIfEnabled(structure)
 	if serviceDir == "" {
 		return utils.PrintErrorAndReturn("Microservice not found or not enabled")
 	}
 
-	targetDir, err := MigrationTargetDir(base, structure, serviceDir)
+	sDir := c.String("dir")
+	targetDir, err := utils.GetTargetDir(base, structure, serviceDir, sDir, MigrationTargetDir)
 	if err != nil {
 		return utils.PrintErrorAndReturn("Could not determine target directory for migration")
 	}
@@ -55,8 +55,7 @@ func MakeMigration(c *cli.Context) error {
 		return utils.PrintErrorAndReturn(fmt.Sprintf("Error creating down migration file: %v", err))
 	}
 
-	prompts.Success("Migration files created")
-	prompts.Outro("Files:")
+	prompts.Success(fmt.Sprintf("Migration %s created successfully at:", migrationName))
 	utils.PrintSuccessf("\n  Up Migration: %s\n  Down Migration: %s", upFile, downFile)
 	return nil
 }
@@ -64,9 +63,9 @@ func MakeMigration(c *cli.Context) error {
 func MigrationTargetDir(base, structure, service string) (string, error) {
 	switch structure {
 	case "modular":
-		return filepath.Join(base, service, "internal", "database", "migrations"), nil
+		return filepath.Join(base, service, "database", "migrations"), nil
 	case "domain_driven":
-		return filepath.Join(base, service, "internal", "database", "migrations"), nil
+		return filepath.Join(base, service, "database", "migrations"), nil
 	case "clean_architecture":
 		return filepath.Join(base, service, "infrastructure", "migrations"), nil
 	case "layered":
